@@ -7,7 +7,7 @@ import {createAccount, loginFirebase, logoutFirebase} from './firebase_auth.js';
 import { startSpinner, stopSpinner } from "../view/util.js";
 
 
-document.getElementById('appHeader').textContent = 'Cloud Web Template'
+document.getElementById('appHeader').textContent = 'My Inventory Manager'
 document.title = 'App Template' ;
 
 const routes =  [
