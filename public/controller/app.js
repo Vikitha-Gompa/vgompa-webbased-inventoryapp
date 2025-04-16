@@ -8,7 +8,7 @@ import { startSpinner, stopSpinner } from "../view/util.js";
 
 
 document.getElementById('appHeader').textContent = 'My Inventory Manager'
-document.title = 'App Template' ;
+document.title = 'Inventory Manager' ;
 
 const routes =  [
     {path: '/', view: HomeView, controller: HomeController},
