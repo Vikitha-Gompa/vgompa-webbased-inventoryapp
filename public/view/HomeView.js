@@ -20,36 +20,18 @@ export class HomeView extends AbstractView {
     async updateView() {
         console.log('HomeView.updateView() called');
         const viewWrapper = document.createElement('div');
-        const response = await fetch('/view/templates/home.html'); { cache: 'no-store' };
+        const response = await fetch('/view/templates/home.html', { cache: 'no-store' });
         viewWrapper.innerHTML = await response.text();
 
-        const tbody = viewWrapper.querySelector('tbody');
-        const numberList = this.controller.model.getNumberList();
-        for (const n of numberList) {
-            const tr = document.createElement('tr');
-            tbody.appendChild(tr);
-
-            const td1 = document.createElement('td');
-            td1.textContent = n;
-            tr.appendChild(td1);
-
-            const td2 = document.createElement('td');
-            td2.innerHTML = `${n} <sup>2</sup> = ${n * n}`;
-            tr.appendChild(td2);
-
-            const td3 = document.createElement('td');
-            td3.innerHTML = `${n} <sup>3</sup> = ${n * n * n}`;
-            tr.appendChild(td3);
-
-        }
+        
 
         return viewWrapper;
     }
 
     attachEvents() {
         // console.log('HomeView.attachEvents() called');
-        const generateButton = document.getElementById('generateDataButton');
-        generateButton.onclick = this.controller.onClickGenerateDataButton;
+        const CreateButton = document.getElementById('createinventoryitem');
+        CreateButton.onclick = this.controller.onClickCreateButton;
     }
 
     async onLeave() {
