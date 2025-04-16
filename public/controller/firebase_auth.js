@@ -21,36 +21,48 @@ export async function loginFirebase(email, password) {
 
 }
 
-export async function logoutFirebase(){
+export async function logoutFirebase() {
     await signOut(auth);
 }
 
 onAuthStateChanged(auth, user => {
+    const loginDiv = document.getElementById('loginDiv');
+    const navMenu = document.getElementById('navMenuContainer');
+    const spaRoot = document.getElementById('spaRoot');
+    const loginInfo = document.getElementById('loginInfo');
+
     currentUser = user;
-    if(user){
+
+    if (user) {
         console.log('AuthStateChanged: User logged in', user.email);
         const loginDiv = document.getElementById('loginDiv');
         loginDiv.classList.replace('d-block', 'd-none');
-        const navMenu = document.getElementById('navMenuContainer');
-        navMenu.classList.replace('d-none', 'd-block');
+        // Show nav buttons when logged in
+        const navButtons = document.querySelectorAll('#navMenuContainer .nav-item');
+        navButtons.forEach(btn => btn.classList.remove('d-none'));
         const spaRoot = document.getElementById('spaRoot');
-        spaRoot.classList.replace('d-none','d-block');
+        spaRoot.classList.replace('d-none', 'd-block');
+        if (loginInfo) loginInfo.innerHTML = user.email;
+        localStorage.setItem('loggedInUser', user.email);
         router.navigate(window.location.pathname);
-    } else{
+    } else {
         console.log('AuthStateChanged: User logged out');
         const loginDiv = document.getElementById('loginDiv');
         loginDiv.classList.replace('d-none', 'd-block');
-        const navMenu = document.getElementById('navMenuContainer');
-        navMenu.classList.replace('d-block', 'd-none');
+        // Hide nav buttons when logged out
+        const navButtons = document.querySelectorAll('#navMenuContainer .nav-item');
+        navButtons.forEach(btn => btn.classList.add('d-none'));
         const spaRoot = document.getElementById('spaRoot');
         spaRoot.classList.replace('d-block', 'd-none');
         router.currentView = null;
         spaRoot.innerHTML = '';  // claer the view
+        if (loginInfo) loginInfo.innerHTML = 'No User';
+        localStorage.removeItem('loggedInUser');
         glHomeModel.reset();
     }
- 
+
 });
 
-export async function createAccount(email, password){
+export async function createAccount(email, password) {
     await createUserWithEmailAndPassword(auth, email, password);
 }

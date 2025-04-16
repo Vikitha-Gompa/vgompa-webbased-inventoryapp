@@ -47,6 +47,27 @@ document.forms.loginForm.onsubmit = async function(e){
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loginInfo = document.getElementById('loginInfo');
+    const navMenu = document.getElementById('navMenuContainer');
+    const spaRoot = document.getElementById('spaRoot');
+    const loginDiv = document.getElementById('loginDiv');
+
+    // Show "No User" by default
+    if (loginInfo) loginInfo.innerHTML = 'No User';
+
+    // Show only the login page initially
+// Always show navbar with "No User"
+if (navMenu) navMenu.classList.remove('d-none');
+
+// Hide nav buttons (but not loginInfo)
+const navButtons = document.querySelectorAll('#navMenuContainer .nav-item');
+navButtons.forEach(btn => btn.classList.add('d-none'));
+    if (spaRoot) spaRoot.classList.replace('d-block', 'd-none');
+    if (loginDiv) loginDiv.classList.replace('d-none', 'd-block');
+});
+
+
 //logout button
 document.getElementById('logoutButton').onclick= async function(e){
     startSpinner();

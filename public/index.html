@@ -12,7 +12,8 @@
 
 <body>
   <!--spinning overlay as progress indicator-->
-  <div id="spinnerOverlay" style="z-index: 1100" class=" d-none position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+  <div id="spinnerOverlay" style="z-index: 1100"
+    class=" d-none position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
     <div class="spinner-border text-primary" role="status" style="width: 50px; height:50px;"></div>
   </div>
 
@@ -32,13 +33,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="btn btn-outline-primary me-3" data-path="/" aria-current="page">Home</a>
+              <a class="btn btn-outline-primary me-3" data-path="/" aria-current="page"> Home </a>
             </li>
             <li class="nav-item">
-              <a class="btn btn-outline-primary me-3" data-path="/profile">Profile</a>
+              <a class="btn btn-outline-primary me-3" data-path="/profile"> Menu2 </a>
+            </li>
+            <li class="nav-item">
+              <button id="logoutButton" class="btn btn-danger"> SignOut </button>
+
             </li>
           </ul>
-          <button id="logoutButton" class="btn btn-danger"> Logout </button>
+          <span id="loginInfo" class="btn btn-secondary">No User</span>
         </div>
       </div>
     </nav>
@@ -46,7 +51,7 @@
 
   <!-- login form-->
   <div class="container">
-    <div id="loginDiv" class="card p-4 shadow d-block">
+    <div id="loginDiv" class="card p-4 shadow bg-body-secondary d-block">
       <h1>Sign in, please!</h1>
       <form name="loginForm">
         <div class="mb-3">
