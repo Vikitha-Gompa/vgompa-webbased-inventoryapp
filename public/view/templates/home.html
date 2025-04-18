@@ -1,8 +1,12 @@
 <div class="container bg-body-secondary p-4 rounded">
+  <form id="createItemForm">
     <div class="d-flex align-items-center mb-4">
-      <input type="text" class="form-control me-2 border border-2 border-dark" placeholder="Item name" style="max-width: 300px;" minlength="2" required>
+      <input type="text" class="form-control me-2 border border-2 border-dark" placeholder="Item name"
+        style="max-width: 400px;" minlength="2" name="name" required>
+
       <button id="createinventoryitem" class="btn btn-outline-primary">Create</button>
     </div>
-    <h2 class="fw-bold fs-3">No inventory has been added!</h2>
-  </div>
-  
+  </form>
+  <h2 id="message" class="fw-bold fs-3">No inventory has been added!</h2>
+  <div class="d-flex flex-wrap gap-3" name="inventoryDisplayArea" id="inventoryDisplayArea"></div>
+</div>
