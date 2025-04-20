@@ -131,9 +131,14 @@ export class HomeView extends AbstractView {
     }
 
     attachEvents() {
-        // console.log('HomeView.attachEvents() called');
+        console.log('HomeView.attachEvents() called');
         const CreateButton = document.getElementById('createinventoryitem');
-        CreateButton.onclick = this.controller.onClickCreateButton;
+        if (createForm) {
+            createForm.onsubmit = (event) => {
+                event.preventDefault(); // prevent page reload
+                this.controller.onClickCreateButton(event); // call your controller logic
+            };}
+       // CreateButton.onclick = this.controller.onClickCreateButton;
     }
 
     async onLeave() {
