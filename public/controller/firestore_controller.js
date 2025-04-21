@@ -6,11 +6,13 @@ import {
     orderBy,
     getDocs,
     doc,
+    where,
     deleteDoc,
     updateDoc,
- } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import { app } from "./firebase_core.js";
 import { InventoryItem } from "../model/InventoryItem.js";
+import { currentUser } from "./firebase_auth.js";
 
 const db = getFirestore(app);
 
@@ -19,12 +21,13 @@ const COLLECTION_MESSAGE_FROM = 'inventory';
 export async function addItem(item) {
     const collRef = collection(db, COLLECTION_MESSAGE_FROM);
     const docRef = await addDoc(collRef, item);
-    return docRef.id;  
+    return docRef.id;
 }
 
 export async function getItemsList() {
     let itemList = [];
     const q = query(collection(db, COLLECTION_MESSAGE_FROM),
+        where('email', '==', currentUser.email),
         orderBy('name', 'asc'));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -35,10 +38,10 @@ export async function getItemsList() {
     });
     return itemList;
 
-    
+
 }
 
-export async function deleteItemById(docId){
+export async function deleteItemById(docId) {
     const docRef = doc(db, COLLECTION_MESSAGE_FROM, docId);
     await deleteDoc(docRef);
 
@@ -49,5 +52,5 @@ export async function updateItemById(docId, update) {
     const docRef = doc(db, COLLECTION_MESSAGE_FROM, docId);
     await updateDoc(docRef, update);
 
-    
+
 }

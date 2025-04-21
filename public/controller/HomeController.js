@@ -91,14 +91,16 @@ export class HomeController {
 
 
     console.log('HomeController.onSubmitCreateMessage() called');
-    const name = e.target.previousElementSibling.value.toLowerCase();
+    const name = e.target.name.value.toLowerCase();
+    // const name = e.target.nextElementSibling?.nextElementSibling?.value.toLowerCase();
 
 
 
-    if (!e.target.parentElement.parentElement.checkValidity()) {
 
-      return;
-    }
+    // if (! e.target.parentElement.parentElement.checkValidity()) {
+
+    //   return;
+    // }
 
     if (this.model.getItemByName(name)) {
       alert(name + " already exists. Update quantity instead");
@@ -106,9 +108,9 @@ export class HomeController {
 
     }
 
-    e.target.innerHTML = "wait...";
-    e.target.disabled = true;
-    e.target.previousElementSibling.value = '';
+    e.target.createinventoryitem.innerHTML = "wait...";
+    e.target.createinventoryitem.disabled = true;
+    e.target.name.value = '';
     const email = currentUser.email;
     const timestamp = Date.now();  // # of ms since 1970, jan 1
     const quantity = 1;
@@ -132,8 +134,8 @@ export class HomeController {
       alert('Error adding item ' + error);
 
     }
-    e.target.disabled = false;
-    e.target.innerHTML = "Create";
+    e.target.createinventoryitem.disabled = false;
+    e.target.createinventoryitem.innerHTML = "Create";
     this.model.addItem(item);
     this.view.render();
 
