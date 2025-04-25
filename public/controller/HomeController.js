@@ -73,7 +73,21 @@ export class HomeController {
 
 
     } else if (id.startsWith("cancel")) {
-      this.view.render();
+      //this.view.render();
+      docId = id.replace("cancel", "");
+      const originalItem = this.model.getItemByID(docId);
+      if (!originalItem) {
+          console.error("Original item not found for cancel: ", docId);
+          return;
+      }
+      // Find the quantity span and reset its value to original
+      const quantitySpan = document.getElementById(`quantity${docId}`);
+      if (quantitySpan) {
+          quantitySpan.innerHTML = originalItem.quantity;
+      } else {
+          console.error("Quantity span not found for cancel: ", docId);
+      }
+
 
     } else {
       console.warn("Unrecognized button ID:", id);
